@@ -2,16 +2,16 @@
  * UI Generation and Updates
  */
 
-import { CONFIG, INJECTION_TARGETS, UI_ID } from './config.js';
-import { log, isElementVisible } from './utils.js';
-import { formatDuration, getTotalVideosCount, getLoadedVideosCount, calculateTotalDuration } from './duration.js';
+import { CONFIG, INJECTION_TARGETS, UI_ID } from './config';
+import { log, isElementVisible } from './utils';
+import { formatDuration, getTotalVideosCount, getLoadedVideosCount, calculateTotalDuration } from './duration';
 
 let isLoadingAll = false;
 
 /**
  * Update the duration display in all injected panels
  */
-export function updateDisplay() {
+export function updateDisplay(): void {
     if (document.visibilityState !== 'visible') {
         return;
     }
@@ -21,14 +21,14 @@ export function updateDisplay() {
         const totalSeconds = calculateTotalDuration();
         const formattedTime = formatDuration(totalSeconds);
 
-        const panels = document.querySelectorAll('.' + UI_ID);
+        const panels = document.querySelectorAll<HTMLElement>('.' + UI_ID);
         panels.forEach(panel => {
-            const durationEl = panel?.querySelector('.yptd-duration');
+            const durationEl = panel.querySelector<HTMLElement>('.yptd-duration');
             if (durationEl) {
                 durationEl.textContent = `Total: ${formattedTime}`;
             }
 
-            const loadBtn = panel?.querySelector('.yptd-load-btn');
+            const loadBtn = panel.querySelector<HTMLButtonElement>('.yptd-load-btn');
             if (loadBtn && !isLoadingAll) {
                 const totalCount = getTotalVideosCount();
 
@@ -48,11 +48,11 @@ export function updateDisplay() {
 /**
  * Scroll through the playlist to load all videos
  */
-export async function loadAllVideos() {
+export function loadAllVideos(): void {
     if (isLoadingAll) return;
     isLoadingAll = true;
 
-    const buttons = document.querySelectorAll(`.${UI_ID} .yptd-load-btn`);
+    const buttons = document.querySelectorAll<HTMLButtonElement>(`.${UI_ID} .yptd-load-btn`);
     buttons.forEach(btn => {
         btn.disabled = true;
         btn.textContent = 'Loading...';
@@ -96,17 +96,15 @@ export async function loadAllVideos() {
 
 /**
  * Check if injection should proceed
- * @returns {boolean} True if should inject
  */
-function shouldInject() {
+function shouldInject(): boolean {
     return window.innerWidth > CONFIG.MIN_VIEWPORT_WIDTH;
 }
 
 /**
  * Create panel DOM element
- * @returns {HTMLDivElement} Panel element
  */
-function createPanelElement() {
+function createPanelElement(): HTMLDivElement {
     const panel = document.createElement('div');
     panel.className = UI_ID;
     panel.innerHTML = `
@@ -118,11 +116,8 @@ function createPanelElement() {
 
 /**
  * Attach panel to target element
- * @param {Element} target - Target element
- * @param {string} position - Insert position
- * @returns {HTMLDivElement|null} Attached panel or null
  */
-function attachPanel(target, position) {
+function attachPanel(target: Element, position: InsertPosition): HTMLDivElement | null {
     const nextNode = target.nextElementSibling;
     if (nextNode?.classList?.contains(UI_ID)) {
         return null;
@@ -131,7 +126,7 @@ function attachPanel(target, position) {
     const panel = createPanelElement();
     target.insertAdjacentElement(position, panel);
 
-    const btn = panel.querySelector('.yptd-load-btn');
+    const btn = panel.querySelector<HTMLButtonElement>('.yptd-load-btn');
     btn?.addEventListener('click', loadAllVideos);
 
     return panel;
@@ -140,7 +135,7 @@ function attachPanel(target, position) {
 /**
  * Inject UI panels into the page
  */
-export function injectUI() {
+export function injectUI(): void {
     try {
         if (!shouldInject()) {
             document.querySelectorAll(`.${UI_ID}`).forEach(el => el.remove());

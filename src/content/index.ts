@@ -3,19 +3,19 @@
  * YouTube Playlist Total Duration Extension
  */
 
-import { CONFIG } from './config.js';
-import { log, debounce, clearDebounceTimeout } from './utils.js';
-import { updateDisplay, injectUI } from './ui.js';
+import { CONFIG } from './config';
+import { log, debounce, clearDebounceTimeout } from './utils';
+import { updateDisplay, injectUI } from './ui';
 
-let updateIntervalId = null;
-let observer = null;
+let updateIntervalId: ReturnType<typeof setInterval> | null = null;
+let observer: MutationObserver | null = null;
 
 const debouncedInjectUI = debounce(injectUI, CONFIG.DEBOUNCE_MS);
 
 /**
  * Start observing DOM changes
  */
-function startObserver() {
+function startObserver(): void {
     if (observer) return;
 
     observer = new MutationObserver(() => {
@@ -29,7 +29,7 @@ function startObserver() {
 /**
  * Start periodic display updates
  */
-function startUpdateInterval() {
+function startUpdateInterval(): void {
     if (updateIntervalId) return;
 
     updateIntervalId = setInterval(() => {
@@ -44,7 +44,7 @@ function startUpdateInterval() {
 /**
  * Cleanup resources
  */
-function cleanup() {
+function cleanup(): void {
     if (observer) {
         observer.disconnect();
         observer = null;
@@ -60,7 +60,7 @@ function cleanup() {
 /**
  * Initialize the extension
  */
-function init() {
+function init(): void {
     log('YouTube Playlist Total Duration extension loaded.');
 
     setTimeout(injectUI, CONFIG.INITIAL_DELAY_MS);

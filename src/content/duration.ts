@@ -2,15 +2,13 @@
  * Duration Calculation Logic
  */
 
-import { SELECTORS } from './config.js';
-import { log } from './utils.js';
+import { SELECTORS } from './config';
+import { log } from './utils';
 
 /**
  * Convert "HH:MM:SS" or "MM:SS" to seconds
- * @param {string} timeStr - Time string
- * @returns {number} Total seconds
  */
-export function parseDuration(timeStr) {
+export function parseDuration(timeStr: string | null | undefined): number {
     if (!timeStr) return 0;
     try {
         const parts = timeStr.split(':').map(Number);
@@ -27,10 +25,8 @@ export function parseDuration(timeStr) {
 
 /**
  * Convert seconds to "HH:MM:SS" or "MM:SS" format
- * @param {number} totalSeconds - Total seconds
- * @returns {string} Formatted time string
  */
-export function formatDuration(totalSeconds) {
+export function formatDuration(totalSeconds: number): string {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
@@ -44,9 +40,8 @@ export function formatDuration(totalSeconds) {
 
 /**
  * Extract total video count from metadata text
- * @returns {number} Total video count
  */
-export function getTotalVideosCount() {
+export function getTotalVideosCount(): number {
     try {
         const metadataRows = document.querySelectorAll(SELECTORS.VIDEO_COUNT);
         for (const row of metadataRows) {
@@ -66,17 +61,15 @@ export function getTotalVideosCount() {
 
 /**
  * Get the count of video elements currently in DOM
- * @returns {number} Loaded video count
  */
-export function getLoadedVideosCount() {
+export function getLoadedVideosCount(): number {
     return document.querySelectorAll(SELECTORS.VIDEO_ITEM).length;
 }
 
 /**
  * Calculate total duration of all visible videos
- * @returns {number} Total seconds
  */
-export function calculateTotalDuration() {
+export function calculateTotalDuration(): number {
     try {
         const durationElements = document.querySelectorAll(SELECTORS.DURATION);
         let totalSeconds = 0;

@@ -2,16 +2,14 @@
  * Utility Functions
  */
 
-import { CONFIG } from './config.js';
+import { CONFIG } from './config';
 
-let debounceTimeoutId = null;
+let debounceTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 /**
  * Log message to console (only when DEBUG is enabled)
- * @param {string} message - Log message
- * @param {...any} args - Additional arguments
  */
-export function log(message, ...args) {
+export function log(message: string, ...args: unknown[]): void {
     if (CONFIG.DEBUG) {
         console.log(`[YPTD] ${message}`, ...args);
     }
@@ -19,23 +17,23 @@ export function log(message, ...args) {
 
 /**
  * Create a debounced version of a function
- * @param {Function} fn - Function to debounce
- * @param {number} delay - Delay in milliseconds
- * @returns {Function} Debounced function
  */
-export function debounce(fn, delay) {
-    return function (...args) {
-        clearTimeout(debounceTimeoutId);
+export function debounce<T extends (...args: unknown[]) => void>(
+    fn: T,
+    delay: number
+): (...args: Parameters<T>) => void {
+    return function (this: unknown, ...args: Parameters<T>): void {
+        if (debounceTimeoutId) {
+            clearTimeout(debounceTimeoutId);
+        }
         debounceTimeoutId = setTimeout(() => fn.apply(this, args), delay);
     };
 }
 
 /**
  * Check if an element is visible in the viewport
- * @param {Element} element - DOM element to check
- * @returns {boolean} True if visible
  */
-export function isElementVisible(element) {
+export function isElementVisible(element: Element | null): boolean {
     if (!element) return false;
     const rect = element.getBoundingClientRect();
     const style = window.getComputedStyle(element);
@@ -48,7 +46,7 @@ export function isElementVisible(element) {
 /**
  * Clear debounce timeout
  */
-export function clearDebounceTimeout() {
+export function clearDebounceTimeout(): void {
     if (debounceTimeoutId) {
         clearTimeout(debounceTimeoutId);
         debounceTimeoutId = null;
