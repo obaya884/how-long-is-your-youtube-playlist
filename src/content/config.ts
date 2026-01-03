@@ -3,7 +3,6 @@
  */
 
 export interface Config {
-    DEBUG: boolean;
     MIN_VIEWPORT_WIDTH: number;
     SCROLL_INTERVAL_MS: number;
     UPDATE_INTERVAL_MS: number;
@@ -25,7 +24,6 @@ export interface InjectionTarget {
 }
 
 export const CONFIG: Config = {
-    DEBUG: false,
     MIN_VIEWPORT_WIDTH: 1080,
     SCROLL_INTERVAL_MS: 1500,
     UPDATE_INTERVAL_MS: 2000,

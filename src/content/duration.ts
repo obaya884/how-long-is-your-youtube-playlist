@@ -3,7 +3,6 @@
  */
 
 import { SELECTORS } from './config';
-import { log } from './utils';
 
 /**
  * Convert "HH:MM:SS" or "MM:SS" to seconds
@@ -18,7 +17,7 @@ export function parseDuration(timeStr: string | null | undefined): number {
             return parts[0] * 60 + parts[1];
         }
     } catch (e) {
-        log('Error parsing duration:', timeStr, e);
+        console.error(`Error parsing duration: ${timeStr}`, e);
     }
     return 0;
 }
@@ -54,7 +53,7 @@ export function getTotalVideosCount(): number {
             }
         }
     } catch (e) {
-        log('Error getting total video count:', e);
+        console.error('Error getting total video count:', e);
     }
     return 0;
 }
@@ -80,7 +79,7 @@ export function calculateTotalDuration(): number {
 
         return totalSeconds;
     } catch (e) {
-        log('Error calculating total duration:', e);
+        console.error('Error calculating total duration:', e);
         return 0;
     }
 }

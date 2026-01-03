@@ -7,15 +7,6 @@ import { CONFIG } from './config';
 let debounceTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 /**
- * Log message to console (only when DEBUG is enabled)
- */
-export function log(message: string, ...args: unknown[]): void {
-    if (CONFIG.DEBUG) {
-        console.log(`[YPTD] ${message}`, ...args);
-    }
-}
-
-/**
  * Create a debounced version of a function
  */
 export function debounce<T extends (...args: unknown[]) => void>(

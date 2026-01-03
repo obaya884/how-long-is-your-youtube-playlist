@@ -4,7 +4,7 @@
  */
 
 import { CONFIG } from './config';
-import { log, debounce, clearDebounceTimeout } from './utils';
+import { debounce, clearDebounceTimeout } from './utils';
 import { updateDisplay, injectUI } from './ui';
 
 let updateIntervalId: ReturnType<typeof setInterval> | null = null;
@@ -23,7 +23,6 @@ function startObserver(): void {
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-    log('Observer started');
 }
 
 /**
@@ -37,8 +36,6 @@ function startUpdateInterval(): void {
             updateDisplay();
         }
     }, CONFIG.UPDATE_INTERVAL_MS);
-
-    log('Update interval started');
 }
 
 /**
@@ -54,14 +51,12 @@ function cleanup(): void {
         updateIntervalId = null;
     }
     clearDebounceTimeout();
-    log('Cleanup complete');
 }
 
 /**
  * Initialize the extension
  */
 function init(): void {
-    log('YouTube Playlist Total Duration extension loaded.');
 
     setTimeout(injectUI, CONFIG.INITIAL_DELAY_MS);
     startObserver();

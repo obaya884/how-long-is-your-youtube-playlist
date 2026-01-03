@@ -3,7 +3,7 @@
  */
 
 import { CONFIG, INJECTION_TARGETS, UI_ID } from './config';
-import { log, isElementVisible } from './utils';
+import { isElementVisible } from './utils';
 import { formatDuration, getTotalVideosCount, getLoadedVideosCount, calculateTotalDuration } from './duration';
 
 let isLoadingAll = false;
@@ -41,7 +41,7 @@ export function updateDisplay(): void {
             }
         });
     } catch (e) {
-        log('Error updating display:', e);
+        console.error('Error updating display:', e);
     }
 }
 
@@ -87,7 +87,7 @@ export function loadAllVideos(): void {
 
             updateDisplay();
         } catch (e) {
-            log('Error during load all:', e);
+            console.error('Error during load all:', e);
             clearInterval(interval);
             isLoadingAll = false;
         }
@@ -123,7 +123,7 @@ export function injectUI(): void {
             });
         });
     } catch (e) {
-        log('Error injecting UI:', e);
+        console.error('Error injecting UI:', e);
     }
 }
 
