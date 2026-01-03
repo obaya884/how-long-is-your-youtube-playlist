@@ -14,8 +14,6 @@ export interface Config {
 
 export interface Selectors {
     DURATION: string;
-    PLAYLIST_CONTAINER: string;
-    HEADER_METADATA: string;
     VIDEO_COUNT: string;
     VIDEO_ITEM: string;
 }
@@ -38,8 +36,6 @@ export const CONFIG: Config = {
 
 export const SELECTORS: Selectors = {
     DURATION: 'ytd-thumbnail-overlay-time-status-renderer badge-shape div',
-    PLAYLIST_CONTAINER: 'ytd-playlist-video-list-renderer #contents',
-    HEADER_METADATA: 'yt-content-metadata-view-model',
     VIDEO_COUNT: 'yt-content-metadata-view-model .yt-content-metadata-view-model__metadata-row, yt-formatted-string',
     VIDEO_ITEM: 'ytd-playlist-video-renderer'
 };
