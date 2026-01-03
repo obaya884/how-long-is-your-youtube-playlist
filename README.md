@@ -34,7 +34,11 @@ YouTube プレイリストの合計再生時間を計算して表示する Chrom
 .
 ├── src/                # ソースコード (TypeScript)
 │   └── content/        # コンテンツスクリプト
-├── dist/               # ビルド済みファイル（拡張機能として読み込むフォルダ）
+│       ├── index.ts    # エントリーポイント（Observer, 初期化）
+│       ├── ui.ts       # UI UIの生成・更新ロジック
+│       ├── duration.ts # 時間の計算ロジック
+│       ├── config.ts   # 設定定数
+│       └── utils.ts    # ユーティリティ関数
 ├── _locales/           # 翻訳ファイル (i18n)
 ├── icons/              # 拡張機能アイコン
 ├── styles.css          # UI スタイル
