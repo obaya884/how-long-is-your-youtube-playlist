@@ -15,7 +15,11 @@
         "https://www.youtube.com/playlist*"
       ],
       "js": [
-        "content.js"
+        "content/config.js",
+        "content/utils.js",
+        "content/duration.js",
+        "content/ui.js",
+        "content/index.js"
       ],
       "css": [
         "styles.css"
