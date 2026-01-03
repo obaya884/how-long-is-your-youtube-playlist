@@ -107,10 +107,7 @@ function shouldInject(): boolean {
 function createPanelElement(): HTMLDivElement {
     const panel = document.createElement('div');
     panel.className = UI_ID;
-    panel.innerHTML = `
-        <span class="yptd-duration">Total: --:--</span>
-        <button class="yptd-load-btn" style="display:none;">Load All</button>
-    `;
+    panel.innerHTML = `<span class="yptd-duration">Total: --:--</span><button class="yptd-load-btn" style="display:none;">Load All</button>`;
     return panel;
 }
 

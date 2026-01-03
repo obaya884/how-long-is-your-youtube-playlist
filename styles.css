@@ -21,16 +21,21 @@
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
   border-radius: 18px;
-  padding: 0 16px;
+  padding: 0 12px;
+  /* Reduced from 16px for better balance */
+  gap: 10px;
+  /* Space between duration and button, only exists when both shown */
+  width: fit-content;
+  /* Ensure container only takes needed space */
+  align-self: flex-start;
+  /* Prevent stretching in flex columns */
 
   /* Reset box-shadow if not needed, or keep subtle */
   box-shadow: none;
 }
 
 /* Total duration text */
-.yptd-duration {
-  margin-right: 12px;
-}
+/* (Currently using inherited styles from container) */
 
 /* Load All button */
 .yptd-load-btn {
