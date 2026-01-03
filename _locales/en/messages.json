@@ -1,0 +1,10 @@
+{
+    "appName": {
+        "message": "How Long Is Your YouTube Playlist?",
+        "description": "The name of the extension"
+    },
+    "appDesc": {
+        "message": "Calculates and displays the total duration of YouTube playlists.",
+        "description": "The description of the extension"
+    }
+}
