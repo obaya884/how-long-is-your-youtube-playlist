@@ -1,12 +1,8 @@
 /**
  * Configuration and Constants
- * YouTube Playlist Total Duration Extension
  */
 
-// Global namespace
-window.YPTD = window.YPTD || {};
-
-window.YPTD.CONFIG = {
+export const CONFIG = {
     DEBUG: false,
     MIN_VIEWPORT_WIDTH: 1080,
     SCROLL_INTERVAL_MS: 1500,
@@ -16,7 +12,7 @@ window.YPTD.CONFIG = {
     DEBOUNCE_MS: 200
 };
 
-window.YPTD.SELECTORS = {
+export const SELECTORS = {
     // Video duration text: "10:05" inside badge-shape
     DURATION: 'ytd-thumbnail-overlay-time-status-renderer badge-shape div',
     // Container for playlist videos
@@ -29,7 +25,7 @@ window.YPTD.SELECTORS = {
     VIDEO_ITEM: 'ytd-playlist-video-renderer'
 };
 
-window.YPTD.INJECTION_TARGETS = [
+export const INJECTION_TARGETS = [
     // Desktop: Button container (Old Layout / Watch Later)
     {
         selector: '.play-menu.ytd-playlist-header-renderer:not(.small-screen-form)',
@@ -44,4 +40,4 @@ window.YPTD.INJECTION_TARGETS = [
     }
 ];
 
-window.YPTD.UI_ID = 'yptd-container';
+export const UI_ID = 'yptd-container';

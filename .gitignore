@@ -1,5 +1,6 @@
 # User specified
 docs/
+dist/
 
 # System specific
 .DS_Store
