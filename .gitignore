@@ -1,0 +1,19 @@
+# User specified
+docs/
+
+# System specific
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node.js (if applicable in future)
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
