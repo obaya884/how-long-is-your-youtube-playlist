@@ -3,9 +3,10 @@
 .yptd-container {
   display: inline-flex;
   align-items: center;
-  margin-left: 12px;
-  /* Add margin-top/bottom just in case it wraps or needs spacing in vertical layouts */
-  margin-top: 4px;
+  margin-left: 0;
+  /* Align with playlist title/buttons */
+  margin-top: 12px;
+  /* Increased from 4px for better spacing */
   margin-bottom: 4px;
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 14px;
