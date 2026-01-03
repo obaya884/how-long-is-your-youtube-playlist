@@ -95,46 +95,12 @@ export function loadAllVideos(): void {
 }
 
 /**
- * Check if injection should proceed
- */
-function shouldInject(): boolean {
-    return window.innerWidth > CONFIG.MIN_VIEWPORT_WIDTH;
-}
-
-/**
- * Create panel DOM element
- */
-function createPanelElement(): HTMLDivElement {
-    const panel = document.createElement('div');
-    panel.className = UI_ID;
-    panel.innerHTML = `<span class="yptd-duration">Total: --:--</span><button class="yptd-load-btn" style="display:none;">Load All</button>`;
-    return panel;
-}
-
-/**
- * Attach panel to target element
- */
-function attachPanel(target: Element, position: InsertPosition): HTMLDivElement | null {
-    const nextNode = target.nextElementSibling;
-    if (nextNode?.classList?.contains(UI_ID)) {
-        return null;
-    }
-
-    const panel = createPanelElement();
-    target.insertAdjacentElement(position, panel);
-
-    const btn = panel.querySelector<HTMLButtonElement>('.yptd-load-btn');
-    btn?.addEventListener('click', loadAllVideos);
-
-    return panel;
-}
-
-/**
  * Inject UI panels into the page
  */
 export function injectUI(): void {
     try {
-        if (!shouldInject()) {
+        // Do not inject UI if viewport is too small (mobile/narrow layouts)
+        if (window.innerWidth <= CONFIG.MIN_VIEWPORT_WIDTH) {
             document.querySelectorAll(`.${UI_ID}`).forEach(el => el.remove());
             return;
         }
@@ -159,4 +125,25 @@ export function injectUI(): void {
     } catch (e) {
         log('Error injecting UI:', e);
     }
+}
+
+/**
+ * Attach panel to target element
+ */
+function attachPanel(target: Element, position: InsertPosition): HTMLDivElement | null {
+    const nextNode = target.nextElementSibling;
+    if (nextNode?.classList?.contains(UI_ID)) {
+        return null;
+    }
+
+    const panel = document.createElement('div');
+    panel.className = UI_ID;
+    panel.innerHTML = `<span class="yptd-duration">Total: --:--</span><button class="yptd-load-btn" style="display:none;">Load All</button>`;
+
+    target.insertAdjacentElement(position, panel);
+
+    const btn = panel.querySelector<HTMLButtonElement>('.yptd-load-btn');
+    btn?.addEventListener('click', loadAllVideos);
+
+    return panel;
 }
