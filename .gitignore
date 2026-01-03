@@ -1,6 +1,6 @@
 # User specified
-docs/
 dist/
+notes/
 
 # System specific
 .DS_Store
