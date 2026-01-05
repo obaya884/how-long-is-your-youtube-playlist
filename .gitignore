@@ -1,20 +1,14 @@
-# User specified
-dist/
-notes/
+# Dependencies
+node_modules/
 
-# System specific
+# Build Output
+dist/
+*.zip
+
+# Documentation
+notes/
+promo/
+
+# System Files
 .DS_Store
 Thumbs.db
-Desktop.ini
-
-# Editors
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Node.js (if applicable in future)
-node_modules/
-npm-debug.log
-yarn-error.log
-.env
