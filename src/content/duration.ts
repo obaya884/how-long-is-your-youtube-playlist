@@ -30,11 +30,11 @@ export function formatDuration(totalSeconds: number): string {
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
 
-    const hStr = h > 0 ? `${h}:` : '';
-    const mStr = m.toString().padStart(h > 0 ? 2 : 1, '0');
+    const hStr = h.toString().padStart(2, '0');
+    const mStr = m.toString().padStart(2, '0');
     const sStr = s.toString().padStart(2, '0');
 
-    return `${hStr}${mStr}:${sStr}`;
+    return `${hStr}:${mStr}:${sStr}`;
 }
 
 /**
