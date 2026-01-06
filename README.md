@@ -27,6 +27,7 @@ YouTube プレイリストの合計再生時間を計算して表示する Chrom
 - `npm run build`: プロジェクトをビルドし、`dist` ディレクトリに出力します。
 - `npm run dev`: 開発モードで起動します（ファイルの変更を監視して自動ビルドします）。
 - `npm run clean`: `dist` ディレクトリを削除します。
+- `npm run zip`: `dist` ディレクトリを zip で圧縮します。
 
 ## プロジェクト構成
 
@@ -51,9 +52,4 @@ YouTube プレイリストの合計再生時間を計算して表示する Chrom
 
 - **Language**: TypeScript
 - **Bundler**: Webpack
-- **Logic**: Vanilla JavaScript (DOM Manipulation)
 - **Styling**: CSS
-
-## ライセンス
-
-MIT License
