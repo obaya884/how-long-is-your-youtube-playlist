@@ -1,5 +1,5 @@
 
-import { parseDuration, formatDuration } from '../src/content/duration';
+import { parseDuration, formatDuration } from '../src/duration';
 
 describe('duration logic', () => {
     describe('parseDuration', () => {

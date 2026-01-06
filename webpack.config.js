@@ -3,7 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        content: './src/content/index.ts'
+        content: './src/index.ts'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
