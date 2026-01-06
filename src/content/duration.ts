@@ -70,11 +70,14 @@ export function getLoadedVideosCount(): number {
  */
 export function calculateTotalDuration(): number {
     try {
-        const durationElements = document.querySelectorAll(SELECTORS.DURATION);
+        const videoItems = document.querySelectorAll(SELECTORS.VIDEO_ITEM);
         let totalSeconds = 0;
 
-        durationElements.forEach(el => {
-            totalSeconds += parseDuration(el?.textContent?.trim());
+        videoItems.forEach(item => {
+            const durationEl = item.querySelector(SELECTORS.DURATION);
+            if (durationEl) {
+                totalSeconds += parseDuration(durationEl.textContent?.trim());
+            }
         });
 
         return totalSeconds;
