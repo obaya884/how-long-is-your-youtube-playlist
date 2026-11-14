@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <!-- Chrome Web Store spec: 96x96 artwork inside a 128x128 canvas, 16px transparent padding -->
-  <circle cx="64" cy="64" r="48" fill="#202124"/>
-  <g fill="none" stroke="#ffd666" stroke-width="7" stroke-linecap="round">
-    <circle cx="64" cy="64" r="27"/>
-    <path d="M64 48v16l11 7"/>
-  </g>
+  <circle cx="64" cy="64" r="48" fill="#ff0033"/>
+  <circle cx="64" cy="64" r="30" fill="none" stroke="#fff" stroke-width="6"/>
+  <!-- The sector from 12 to 4 o'clock: the time that has run -->
+  <path d="M64 64V42a22 22 0 0 1 19.05 33z" fill="#fff"/>
 </svg>
