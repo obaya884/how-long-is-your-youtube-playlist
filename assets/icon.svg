@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Chrome Web Store spec: 96x96 artwork inside a 128x128 canvas, 16px transparent padding -->
+  <circle cx="64" cy="64" r="48" fill="#202124"/>
+  <g fill="none" stroke="#ffd666" stroke-width="7" stroke-linecap="round">
+    <circle cx="64" cy="64" r="27"/>
+    <path d="M64 48v16l11 7"/>
+  </g>
+</svg>
