@@ -1,10 +1,38 @@
 {
     "appName": {
-        "message": "How Long Is Your YouTube Playlist?",
+        "message": "Playlist Duration for YouTube™",
         "description": "The name of the extension"
     },
     "appDesc": {
-        "message": "Calculates and displays the total duration of YouTube playlists.",
+        "message": "Shows the total duration of a YouTube™ playlist on the playlist page.",
         "description": "The description of the extension"
+    },
+    "totalLabel": {
+        "message": "Total: $TIME$",
+        "description": "Total duration of the loaded videos, shown on the playlist page",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "01:38:44"
+            }
+        }
+    },
+    "loadAll": {
+        "message": "Load All",
+        "description": "Button that loads the videos YouTube has not loaded yet"
+    },
+    "loadAllRemaining": {
+        "message": "Load All ($COUNT$ remaining)",
+        "description": "The same button, when the number of videos not loaded yet is known",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "58"
+            }
+        }
+    },
+    "stopLoading": {
+        "message": "Stop loading",
+        "description": "Label of the button while it is loading; clicking stops it"
     }
 }

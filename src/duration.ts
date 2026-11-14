@@ -1,88 +1,28 @@
 /**
- * Duration Calculation Logic
+ * Duration text <-> seconds
  */
 
-import { SELECTORS } from './config';
-
 /**
- * Convert "HH:MM:SS" or "MM:SS" to seconds
+ * Convert "H:MM:SS" or "M:SS" to seconds.
+ * Anything else (a "LIVE" badge, an empty badge) counts as 0.
  */
 export function parseDuration(timeStr: string | null | undefined): number {
     if (!timeStr) return 0;
-    try {
-        const parts = timeStr.split(':').map(Number);
-        if (parts.length === 3) {
-            return parts[0] * 3600 + parts[1] * 60 + parts[2];
-        } else if (parts.length === 2) {
-            return parts[0] * 60 + parts[1];
-        }
-    } catch (e) {
-        console.error(`Error parsing duration: ${timeStr}`, e);
-    }
-    return 0;
+
+    const parts = timeStr.trim().split(':');
+    if (parts.length < 2 || parts.length > 3) return 0;
+    if (!parts.every(part => /^\d+$/.test(part))) return 0;
+
+    return parts.reduce((seconds, part) => seconds * 60 + Number(part), 0);
 }
 
 /**
- * Convert seconds to "HH:MM:SS" or "MM:SS" format
+ * Convert seconds to "HH:MM:SS"
  */
 export function formatDuration(totalSeconds: number): string {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
 
-    const hStr = h.toString().padStart(2, '0');
-    const mStr = m.toString().padStart(2, '0');
-    const sStr = s.toString().padStart(2, '0');
-
-    return `${hStr}:${mStr}:${sStr}`;
-}
-
-/**
- * Extract total video count from metadata text
- */
-export function getTotalVideosCount(): number {
-    try {
-        const metadataRows = document.querySelectorAll(SELECTORS.VIDEO_COUNT);
-        for (const row of metadataRows) {
-            const text = row?.textContent || '';
-            if (text.includes('本の動画') || text.includes('videos')) {
-                const match = text.match(/([\d,]+)/);
-                if (match) {
-                    return parseInt(match[1].replace(/,/g, ''), 10);
-                }
-            }
-        }
-    } catch (e) {
-        console.error('Error getting total video count:', e);
-    }
-    return 0;
-}
-
-/**
- * Get the count of video elements currently in DOM
- */
-export function getLoadedVideosCount(): number {
-    return document.querySelectorAll(SELECTORS.VIDEO_ITEM).length;
-}
-
-/**
- * Calculate total duration of all visible videos
- */
-export function calculateTotalDuration(): number {
-    try {
-        const videoItems = document.querySelectorAll(SELECTORS.VIDEO_ITEM);
-        let totalSeconds = 0;
-
-        videoItems.forEach(item => {
-            const durationEl = item.querySelector(SELECTORS.DURATION);
-            if (durationEl) {
-                totalSeconds += parseDuration(durationEl.textContent?.trim());
-            }
-        });
-
-        return totalSeconds;
-    } catch (e) {
-        console.error('Error calculating total duration:', e);
-        return 0;
-    }
+    return [h, m, s].map(n => n.toString().padStart(2, '0')).join(':');
 }

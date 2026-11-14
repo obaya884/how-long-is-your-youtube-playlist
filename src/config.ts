@@ -2,53 +2,31 @@
  * Configuration and Constants
  */
 
-export interface Config {
-    MIN_VIEWPORT_WIDTH: number;
-    SCROLL_INTERVAL_MS: number;
-    UPDATE_INTERVAL_MS: number;
-    INITIAL_DELAY_MS: number;
-    MAX_NO_CHANGE_COUNT: number;
-    DEBOUNCE_MS: number;
-}
-
-export interface Selectors {
-    DURATION: string;
-    VIDEO_COUNT: string;
-    VIDEO_ITEM: string;
-}
-
-export interface InjectionTarget {
-    selector: string;
-    position: InsertPosition;
-    unique: boolean;
-}
-
-export const CONFIG: Config = {
+export const CONFIG = {
+    /** The panel is not shown in the narrow layout */
     MIN_VIEWPORT_WIDTH: 1080,
-    SCROLL_INTERVAL_MS: 1500,
-    UPDATE_INTERVAL_MS: 2000,
-    INITIAL_DELAY_MS: 1000,
-    MAX_NO_CHANGE_COUNT: 5,
-    DEBOUNCE_MS: 200
-};
+    /** Wait this long after the last DOM change before refreshing the panel */
+    DEBOUNCE_MS: 200,
+    /** How often "Load All" checks progress and scrolls to the next batch */
+    LOAD_POLL_MS: 500,
+    /** "Load All" gives up when no new video appears for this long */
+    LOAD_STALL_MS: 8000,
+} as const;
 
-export const SELECTORS: Selectors = {
-    DURATION: 'ytd-thumbnail-overlay-time-status-renderer badge-shape div',
-    VIDEO_COUNT: 'yt-content-metadata-view-model .yt-content-metadata-view-model__metadata-row, yt-formatted-string',
-    VIDEO_ITEM: 'ytd-playlist-video-renderer'
-};
+export const SELECTORS = {
+    PLAYLIST_ROOT: 'ytd-browse[page-subtype="playlist"]:not([hidden])',
+    VIDEO_ITEM: 'ytd-playlist-video-renderer, yt-item-section-renderer yt-lockup-view-model',
+    VIDEO_LIST: 'ytd-playlist-video-list-renderer, yt-item-section-renderer',
+    DURATION_BADGE: 'badge-shape',
+    VIDEO_LINK: 'a[href*="/watch"]',
+    CONTINUATION: 'ytd-continuation-item-renderer, yt-continuation-item-view-model',
+    COUNT_CLASSIC: 'ytd-playlist-byline-renderer .byline-item',
+    COUNT_ROWS: 'yt-page-header-view-model .ytContentMetadataViewModelMetadataRow',
+    /** The panel goes right after the first visible one of these */
+    INJECTION_TARGETS: [
+        '.play-menu.ytd-playlist-header-renderer:not(.small-screen-form)',
+        'yt-page-header-view-model yt-flexible-actions-view-model',
+    ],
+} as const;
 
-export const INJECTION_TARGETS: InjectionTarget[] = [
-    {
-        selector: '.play-menu.ytd-playlist-header-renderer:not(.small-screen-form)',
-        position: 'afterend',
-        unique: true
-    },
-    {
-        selector: 'yt-flexible-actions-view-model',
-        position: 'afterend',
-        unique: true
-    }
-];
-
-export const UI_ID = 'yptd-container';
+export const PANEL_CLASS = 'yptd-container';

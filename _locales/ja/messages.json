@@ -1,10 +1,38 @@
 {
     "appName": {
-        "message": "How Long Is Your YouTube Playlist?",
+        "message": "Playlist Duration for YouTube™",
         "description": "拡張機能の名前"
     },
     "appDesc": {
-        "message": "YouTubeプレイリストの総再生時間を表示します。",
+        "message": "YouTube™ の再生リストの合計再生時間を、再生リストのページに表示します。",
         "description": "拡張機能の説明"
+    },
+    "totalLabel": {
+        "message": "合計: $TIME$",
+        "description": "読み込み済みの動画の合計再生時間。再生リストのページに表示する",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "01:38:44"
+            }
+        }
+    },
+    "loadAll": {
+        "message": "すべて読み込む",
+        "description": "YouTube がまだ読み込んでいない動画を読み込むボタン"
+    },
+    "loadAllRemaining": {
+        "message": "すべて読み込む（残り $COUNT$ 本）",
+        "description": "同じボタン。まだ読み込んでいない動画の本数が分かるとき",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "58"
+            }
+        }
+    },
+    "stopLoading": {
+        "message": "読み込みを中止",
+        "description": "読み込み中のボタンの文言。押すと中止する"
     }
 }

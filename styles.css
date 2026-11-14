@@ -1,66 +1,55 @@
-/* Main container for the total duration integration */
-/* Main container for the total duration integration */
+/* Panel in the playlist header: total duration and the Load All button.
+   The header keeps its dark, image-tinted background in both YouTube themes,
+   so the colors match the header's own buttons rather than the page theme. */
 .yptd-container {
   display: inline-flex;
   align-items: center;
-  margin-left: 0;
-  /* Align with playlist title/buttons */
-  margin-top: 12px;
-  /* Increased from 4px for better spacing */
-  margin-bottom: 4px;
+  align-self: flex-start;
+  flex-shrink: 0;
+  gap: 10px;
+  width: fit-content;
+  height: 36px;
+  margin: 12px 0 4px;
+  padding: 0 12px;
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  color: #fff;
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #fff;
-  height: 36px;
-
-  /* Prevent layout squashing */
-  flex-shrink: 0;
   white-space: nowrap;
-
-  /* Native glassmorphism style (matches Shuffle/Menu buttons) */
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border-radius: 18px;
-  padding: 0 12px;
-  /* Reduced from 16px for better balance */
-  gap: 10px;
-  /* Space between duration and button, only exists when both shown */
-  width: fit-content;
-  /* Ensure container only takes needed space */
-  align-self: flex-start;
-  /* Prevent stretching in flex columns */
-
-  /* Reset box-shadow if not needed, or keep subtle */
-  box-shadow: none;
 }
 
-/* Total duration text */
-/* (Currently using inherited styles from container) */
+.yptd-duration {
+  font-variant-numeric: tabular-nums;
+}
 
-/* Load All button */
 .yptd-load-btn {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 18px;
-  color: #fff;
-  cursor: pointer;
-  padding: 0 10px;
-  height: 24px;
-  font-size: 12px;
-  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  background-color: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
   transition: background-color 0.2s;
+}
+
+.yptd-load-btn[hidden] {
+  display: none;
 }
 
 .yptd-load-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.yptd-load-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  border-color: rgba(255, 255, 255, 0.1);
+.yptd-load-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }

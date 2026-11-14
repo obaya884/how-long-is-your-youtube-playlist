@@ -1,43 +1,42 @@
-
 import { parseDuration, formatDuration } from '../src/duration';
 
-describe('duration logic', () => {
-    describe('parseDuration', () => {
-        it('should parse "MM:SS" format', () => {
-            expect(parseDuration('10:00')).toBe(600);
-            expect(parseDuration('01:00')).toBe(60);
-            expect(parseDuration('00:01')).toBe(1);
-        });
-
-        it('should parse "HH:MM:SS" format', () => {
-            expect(parseDuration('1:00:00')).toBe(3600);
-            expect(parseDuration('01:01:01')).toBe(3661);
-        });
-
-        it('should handle single digit parts', () => {
-            expect(parseDuration('1:1:1')).toBe(3661);
-            expect(parseDuration('0:05')).toBe(5);
-        });
-
-        it('should return 0 for invalid inputs', () => {
-            expect(parseDuration('')).toBe(0);
-            expect(parseDuration(null)).toBe(0);
-            expect(parseDuration(undefined)).toBe(0);
-            expect(parseDuration('invalid')).toBe(0); // split length 1
-        });
+describe('parseDuration', () => {
+    it.each([
+        ['10:00', 600],
+        ['00:01', 1],
+        ['0:05', 5],
+        ['1:00:00', 3600],
+        ['01:01:01', 3661],
+        ['1:1:1', 3661],
+        ['25:37:26', 92246],
+        [' 15:29 ', 929],
+    ])('parses %p as %p seconds', (text, seconds) => {
+        expect(parseDuration(text)).toBe(seconds);
     });
 
-    describe('formatDuration', () => {
-        it('should format seconds to "HH:MM:SS"', () => {
-            expect(formatDuration(600)).toBe('00:10:00');
-            expect(formatDuration(65)).toBe('00:01:05');
-            expect(formatDuration(0)).toBe('00:00:00');
-            expect(formatDuration(3600)).toBe('01:00:00');
-            expect(formatDuration(3665)).toBe('01:01:05');
-        });
+    it.each([
+        ['', 'empty'],
+        [null, 'null'],
+        [undefined, 'undefined'],
+        ['invalid', 'a word'],
+        ['LIVE', 'a live badge'],
+        ['1:xx', 'a non-numeric part'],
+        ['1:2:3:4', 'too many parts'],
+        ['-1:30', 'a negative part'],
+    ])('returns 0 for %p (%s)', (text, _why) => {
+        expect(parseDuration(text)).toBe(0);
+    });
+});
 
-        it('should handle large durations', () => {
-            expect(formatDuration(123456)).toBe('34:17:36');
-        });
+describe('formatDuration', () => {
+    it.each([
+        [0, '00:00:00'],
+        [65, '00:01:05'],
+        [600, '00:10:00'],
+        [3665, '01:01:05'],
+        [123456, '34:17:36'],
+        [360000, '100:00:00'],
+    ])('formats %p seconds as %p', (seconds, text) => {
+        expect(formatDuration(seconds)).toBe(text);
     });
 });

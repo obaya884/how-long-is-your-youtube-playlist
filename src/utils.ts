@@ -2,29 +2,37 @@
  * Utility Functions
  */
 
-import { CONFIG } from './config';
-
-let debounceTimeoutId: ReturnType<typeof setTimeout> | null = null;
-
-/**
- * Create a debounced version of a function
- */
-export function debounce<T extends (...args: unknown[]) => void>(
-    fn: T,
-    delay: number
-): (...args: Parameters<T>) => void {
-    return function (this: unknown, ...args: Parameters<T>): void {
-        if (debounceTimeoutId) {
-            clearTimeout(debounceTimeoutId);
-        }
-        debounceTimeoutId = setTimeout(() => fn.apply(this, args), delay);
-    };
+export interface Debounced {
+    (): void;
+    cancel(): void;
 }
 
 /**
- * Check if an element is visible in the viewport
+ * Run `fn` once, `delay` ms after the last call
  */
-export function isElementVisible(element: Element | null): boolean {
+export function debounce(fn: () => void, delay: number): Debounced {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const debounced = (): void => {
+        debounced.cancel();
+        timeoutId = setTimeout(() => {
+            timeoutId = null;
+            fn();
+        }, delay);
+    };
+    debounced.cancel = (): void => {
+        if (timeoutId !== null) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+        }
+    };
+    return debounced;
+}
+
+/**
+ * Whether an element takes up space on the page
+ */
+export function isElementVisible(element: Element | null | undefined): boolean {
     if (!element) return false;
     const rect = element.getBoundingClientRect();
     const style = window.getComputedStyle(element);
@@ -32,14 +40,4 @@ export function isElementVisible(element: Element | null): boolean {
         rect.height > 0 &&
         style.visibility !== 'hidden' &&
         style.display !== 'none';
-}
-
-/**
- * Clear debounce timeout
- */
-export function clearDebounceTimeout(): void {
-    if (debounceTimeoutId) {
-        clearTimeout(debounceTimeoutId);
-        debounceTimeoutId = null;
-    }
 }

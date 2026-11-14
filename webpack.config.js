@@ -27,8 +27,8 @@ module.exports = {
             patterns: [
                 { from: 'manifest.json', to: 'manifest.json' },
                 { from: 'styles.css', to: 'styles.css' },
-                { from: 'icons', to: 'icons' },
-                { from: '_locales', to: '_locales' }
+                { from: 'icons', to: 'icons', globOptions: { ignore: ['**/.DS_Store'] } },
+                { from: '_locales', to: '_locales', globOptions: { ignore: ['**/.DS_Store'] } }
             ]
         })
     ],
